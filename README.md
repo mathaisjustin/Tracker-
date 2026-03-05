@@ -47,8 +47,10 @@ And connect to an **existing local PostgreSQL** instance on your server.
 Example connection string format:
 
 ```bash
-DATABASE_URL=postgresql://tracker_user:your_password@host.docker.internal:5432/tracker
+DATABASE_URL=postgresql://tracker_user:your_password@192.168.1.50:5432/tracker
 ```
+
+> Use your server LAN IP or DNS name in Linux environments (for example `192.168.1.50`), not `host.docker.internal` unless you explicitly configured `extra_hosts`/`host-gateway`.
 
 > If PostgreSQL runs on the same host but outside Docker, ensure network rules allow container-to-host access.
 
@@ -62,7 +64,9 @@ DATABASE_URL=postgresql://tracker_user:your_password@host.docker.internal:5432/t
    - `llama3`
    - `phi`
 3. Confirm Ollama API is reachable from containers.
-4. Set `OLLAMA_URL` correctly (example: `http://host.docker.internal:11434`).
+4. Set `OLLAMA_URL` correctly (example: `http://192.168.1.50:11434`).
+
+> Use the same Linux-safe host approach as `DATABASE_URL` (LAN IP/DNS or a Docker service name on a shared network).
 
 Validation commands:
 
